@@ -20,6 +20,7 @@ const hasNextPage = computed(() => {
 watchEffect(() => {
   EventService.getEvents(perPage.value, page.value).then(({data, headers}: { data: Event[], headers: any }) => {
     events.value = data;
+    console.log(headers);
     totalEvents.value = headers['x-total-count']
   }).catch((e) => {
     console.error(e);
