@@ -7,9 +7,7 @@ import { useRouter } from 'vue-router'
 
 const organizer = ref<Organizer>({
   id: 0,
-  name: '',
-  organization: '',
-  address: ''
+  name: ''
 })
 
 const router = useRouter()
@@ -39,7 +37,7 @@ function saveOrganizer() {
           class="ml-2 border rounded px-2 py-1 field"
         />
       </div>
-      <div class="mb-2">
+      <!-- <div class="mb-2">
         <label>Organization</label>
         <input
           type="text"
@@ -57,7 +55,7 @@ function saveOrganizer() {
           placeholder="Address"
           class="ml-2 border rounded px-2 py-1 field"
         />
-      </div>
+      </div> -->
 
       <button type="submit" class="button bg-blue-500 rounded px-3 py-2 text-white">Submit</button>
     </form>

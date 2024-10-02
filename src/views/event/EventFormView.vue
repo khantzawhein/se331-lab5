@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import EventService from '@/services/EventService'
 import { useMessageStore } from '@/stores/message'
-import type { Event } from '@/type'
-import { ref } from 'vue'
+import { type Organizer, type Event } from '@/type'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import BaseInput from '@/components/BaseInput.vue'
+import OrganizerService from '@/services/OrganizerService'
+import BaseSelect from '@/components/BaseSelect.vue'
 
 const event = ref<Event>({
   id: 0,
@@ -14,7 +17,18 @@ const event = ref<Event>({
   date: '',
   time: '',
   petsAllowed: false,
-  organizer: ''
+  organizer: { id: 0, name: '' }
+})
+
+const organizer = ref<Organizer[]>([])
+onMounted(() => {
+  OrganizerService.getOrganizers()
+    .then((response) => {
+      organizer.value = response.data
+    })
+    .catch((e) => {
+      router.push({ name: 'network-error-view' })
+    })
 })
 
 const router = useRouter()
@@ -36,44 +50,54 @@ function saveEvent() {
     <h1 class="text-center">Create an event</h1>
     <form @submit.prevent="saveEvent">
       <div class="mb-2">
-        <label>Category</label>
-        <input
+        <BaseInput
           type="text"
           v-model="event.category"
           placeholder="Category"
           class="ml-2 border rounded px-2 py-1 field"
-        />
+          label="Category"
+        ></BaseInput>
       </div>
       <h3>Name & Describe your event</h3>
       <div class="mb-2">
-        <label>Title</label>
-        <input
+        <BaseInput
           type="text"
           v-model="event.title"
           placeholder="Title"
           class="ml-2 border rounded px-2 py-1 field"
-        />
+          label="Title"
+        ></BaseInput>
       </div>
 
       <div class="mb-2">
-        <label>Description</label>
-        <input
+        <BaseInput
           type="text"
           v-model="event.description"
           placeholder="Description"
           class="ml-2 border rounded px-2 py-1 field"
-        />
+          label="Description"
+        ></BaseInput>
       </div>
 
       <div class="mb-2">
         <h3>Where is your event?</h3>
-        <label>Location</label>
-        <input
+        <BaseInput
           type="text"
           v-model="event.location"
           placeholder="Location"
           class="ml-2 border rounded px-2 py-1 field"
-        />
+          label="Location"
+        ></BaseInput>
+      </div>
+
+      <div class="mb-2">
+        <h3>Who is your organizer?</h3>
+        <BaseSelect
+          v-model="event.organizer.id"
+          class="ml-2 border rounded px-2 py-1 field"
+          :options="organizer"
+          label="Select an Organizer"
+        ></BaseSelect>
       </div>
 
       <button type="submit" class="button bg-blue-500 rounded px-3 py-2 text-white">Submit</button>
