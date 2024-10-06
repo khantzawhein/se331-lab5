@@ -3,7 +3,12 @@
     class="cursor-pointer border border-gray-600 p-[20px] w-[250px] mb-[18px] hover:scale-[1.01] hover:shadow-sp"
   >
     <h2 class="text-xl">{{ organizer.name }}</h2>
-    <span>@ {{ organizer.organization }} @ {{ organizer.address }}</span>
+    <img
+      v-if="organizer.image"
+      :src="organizer.image"
+      alt="Organizer Image"
+      class="w-[200px] h-[200px] object-cover"
+    />
   </div>
 </template>
 

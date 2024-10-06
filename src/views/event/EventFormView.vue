@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 import BaseInput from '@/components/BaseInput.vue'
 import OrganizerService from '@/services/OrganizerService'
 import BaseSelect from '@/components/BaseSelect.vue'
+import ImageUpload from '@/components/ImageUpload.vue'
 
 const event = ref<Event>({
   id: 0,
@@ -17,7 +18,8 @@ const event = ref<Event>({
   date: '',
   time: '',
   petsAllowed: false,
-  organizer: { id: 0, name: '' }
+  organizer: { id: 0, name: '' },
+  images: []
 })
 
 const organizer = ref<Organizer[]>([])
@@ -98,6 +100,11 @@ function saveEvent() {
           :options="organizer"
           label="Select an Organizer"
         ></BaseSelect>
+      </div>
+
+      <div class="mb-2">
+        <h3>The image of the Event</h3>
+        <ImageUpload v-model="event.images"></ImageUpload>
       </div>
 
       <button type="submit" class="button bg-blue-500 rounded px-3 py-2 text-white">Submit</button>
