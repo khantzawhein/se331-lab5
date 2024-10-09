@@ -14,10 +14,16 @@ import { useEventStore } from '@/stores/event'
 import EventFormView from '@/views/event/EventFormView.vue'
 import OrganizerFormView from '@/views/organizers/OrganizerFormView.vue'
 import OrganizerListView from '@/views/organizers/OrganizerListView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
     {
       path: '/',
       name: 'event-list-view',

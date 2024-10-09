@@ -33,5 +33,6 @@ export interface EventState {
 export interface Organizer {
   id: number
   name: string
-  image: string | null
+  image?: string | null
+  roles: string[]
 }

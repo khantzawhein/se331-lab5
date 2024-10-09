@@ -1,12 +1,12 @@
 import './assets/style.css'
-import {createApp} from 'vue'
-import {createPinia} from 'pinia'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import 'nprogress/nprogress.css'
-
+import '@/services/AxiosInterceptorSetup'
 
 import App from './App.vue'
 import router from './router'
-import {inject} from '@vercel/analytics';
+import { inject } from '@vercel/analytics'
 
 const app = createApp(App)
 
@@ -15,4 +15,4 @@ app.use(router)
 
 app.mount('#app')
 
-inject();
+inject()
